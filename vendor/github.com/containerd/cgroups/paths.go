@@ -60,6 +60,7 @@ func PidPath(pid int) Path {
 func existingPath(paths map[string]string, suffix string) Path {
 	// localize the paths based on the root mount dest for nested cgroups
 	for n, p := range paths {
+           if !strings.HasSuffix(n,"mirror") && !strings.HasSuffix(n,"irmas"){
 		dest, err := getCgroupDestination(string(n))
 		if err != nil {
 			return errorPath(err)
@@ -72,7 +73,7 @@ func existingPath(paths map[string]string, suffix string) Path {
 			rel = dest
 		}
 		paths[n] = filepath.Join("/", rel)
-	}
+	}}
 	return func(name Name) (string, error) {
 		root, ok := paths[string(name)]
 		if !ok {
