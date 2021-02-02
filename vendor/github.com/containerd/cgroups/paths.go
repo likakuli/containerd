@@ -19,7 +19,7 @@ package cgroups
 import (
 	"fmt"
 	"path/filepath"
-
+        "string"
 	"github.com/pkg/errors"
 )
 
